@@ -1,23 +1,8 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld/>
+      <p>Test - App is Working!</p>
+      <router-view />
     </v-main>
   </v-app>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-}
-</script>
