@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class NotificationMail extends Mailable
+{
+    use Queueable, SerializesModels;
+    
+    public $subject, $body;
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+
+    public function __construct($subject, $body)
+    {
+        $this->subject = $subject;
+        $this->body = $body;
+
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+
+        $name = config('constant.MAIL_FROM_NAME');
+        $from = config('constant.MAIL_FROM_ADDRESS');
+        return $this->html($this->body)->from($from, $name)->replyTo($from, $name)->subject($this->subject);
+    }
+}
