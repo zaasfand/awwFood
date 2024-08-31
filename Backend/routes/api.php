@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('notification/send-notifications', [NotificationController::class, 'SendNotificationsApi']);
 Route::post('notification/schedule-location-check', [NotificationController::class, 'scheduleLocationCheck']);
 
+
+Route::post('login', [AuthController::class, 'login']);
+Route::post('signup', [AuthController::class, 'signup']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('change-role', [AuthController::class, 'changeRole']);
+    Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+});
