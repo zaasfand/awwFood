@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FoodController;
+
+
 
 
 /*
@@ -32,4 +35,7 @@ Route::post('signup', [AuthController::class, 'signup']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('change-role', [AuthController::class, 'changeRole']);
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    Route::get('/food', [FoodController::class, 'index']); // List all food items
+    Route::post('/food', [FoodController::class, 'store']); // Add a new food item
+    Route::post('/food/accept/{id}', [FoodController::class, 'accept']); // Accept an order
 });
